@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>SimpleCalc</title>
+  <style>
+    /* styles.css file contains the CSS code for the calculator */
+
+    /* Basic styling for the body and container */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      /* Adding a gradient background */
+      background: #eb01a5;
+      background-image: url("IMAGE_URL"); /* fallback */
+      background-image: url("IMAGE_URL"), linear-gradient(#eb01a5, #d13531); /* W3C */
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin: 50px auto;
+    }
+
+    /* Styling for the calculator title */
+    h1 {
+      text-align: center;
+      color: #333333;
+    }
+
+    /* Styling for the calculator */
+    .calculator {
+      width: 100%;
+      height: auto;
+      border: 2px solid #333333;
+      border-radius: 10px;
+    }
+
+    /* Styling for the display screen */
+    .display-box {
+      width: 100%;
+      height: 80px;
+      font-size: 32px;
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    /* Styling for the buttons */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+    }
+
+    .buttons button {
+      width: auto;
+      height: auto;
+      padding: 20px;
+      font-size: 24px;
+    }
+
+    /* Styling for different types of buttons */
+    #clear {
+      background-color: #00ff00;
+    }
+
+    #divide, #multiply, #subtract, #add {
+      background-color: #00ff00;
+    }
+
+    #equal {
+      background-color: #00ff00;
+    }
+
+    #zero, #decimal {
+      background-color: #cccccc;
+    }
+
+    #one, #two, #three, #four, #five, #six, #seven, #eight, #nine {
+      background-color: #eeeeee;
+    }
+
+    /* Adding some hover effects */
+    .buttons button:hover {
+      opacity: .8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SimpleCalc</h1>
+    <div class="calculator">
+      <input class="display-box" type="text" id="result" disabled />
+      <div class="buttons">
+        <!-- clearScreen () function clears all the values -->
+        <button onclick="clearScreen ()" id="clear">C</button>
+        <!-- display (value) function displays the value on the screen -->
+        <button onclick="display ('7')" id="seven">7</button>
+        <button onclick="display ('8')" id="eight">8</button>
+        <button onclick="display ('9')" id="nine">9</button>
+        <!-- performOperation (operator) function performs the operation -->
+        <button onclick="performOperation ('/')" id="divide">/</button>
+        <button onclick="display ('4')" id="four">4</button>
+        <button onclick="display ('5')" id="five">5</button>
+        <button onclick="display ('6')" id="six">6</button>
+        <button onclick="performOperation ('*')" id="multiply">*</button>
+        <button onclick="display ('1')" id="one">1</button>
+        <button onclick="display ('2')" id="two">2</button>
+        <button onclick="display ('3')" id="three">3</button>
+        <button onclick="performOperation ('-')" id="subtract">-</button>
+        <button onclick="display ('0')" id="zero">0</button>
+        <button onclick="display ('.')" id="decimal">.</button>
+        <!-- compute () function evaluates the expression and returns the result -->
+        <button onclick="compute ()" id="equal">=</button>
+        <button onclick="performOperation ('+')" id="add">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- script.js file contains the JavaScript code for the calculator -->
+  <script>
+     // script.js file contains the JavaScript code for the calculator
+
+     // Getting the display screen element by its id
+     var screen = document.getElementById("result");
+
+     // Initializing a variable to store the expression
+     var expression = "";
+
+     // Function to display a value on the screen
+     function display (value) {
+
+         // Appending the value to the expression
+         expression += value;
+
+         // Displaying the expression on the screen
+         screen.value = expression;
+
+     }
+
+     // Function to perform an operation
+     function performOperation (operator) {
+
+         // Checking if the expression is not empty
+         if (expression != "") {
+
+           // Getting the last character of the expression
+           var lastChar = expression[expression.length - 1];
+
+           // Checking if the last character is not an operator
+           if (lastChar != "+" && lastChar != "-" && lastChar != "*" && lastChar != "/") {
+
+             // Appending the operator to the expression
+             expression += operator;
+
+             // Displaying the expression on the screen
+             screen.value = expression;
+
+           }
+
+         }
+
+     }
+
+     // Function to compute the result
+     function compute () {
+
+         // Checking if the expression is not empty
+         if (expression != "") {
+
+           // Getting the last character of the expression
+           var lastChar = expression[expression.length - 1];
+
+           // Checking if the last character is not an operator
+           if (lastChar != "+" && lastChar != "-" && lastChar != "*" && lastChar != "/") {
+
+             // Evaluating the expression using the eval() function
+             var result = eval(expression);
+
+             // Rounding off the result to two decimal places
+             result = result.toFixed(2);
+
+             // Displaying the result on the screen
+             screen.value = result;
+
+             // Updating the expression with the result
+             expression = result;
+
+           }
+
+         }
+
+     }
+
+     // Function to clear the screen
+     function clearScreen () {
+
+         // Clearing the expression
+         expression = "";
+
+         // Clearing the screen
+         screen.value = expression;
+
+     }
+  </script>
+</body>
+</html>
